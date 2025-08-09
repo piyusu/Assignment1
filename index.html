@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UndoSchool - Course Browse</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik&family=Dancing+Script:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Optional: Tailwind config customization -->
+    <script>
+      tailwind.config = {
+        darkMode: "class", // enable dark mode with 'dark' class
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Rubik", "sans-serif"],
+              cursive: ["Dancing Script", "cursive"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <script src="index.js" defer></script>
+  </head>
+  <body
+    class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 font-sans"
+  >
+    <!-- ✅ Sticky Transparent Navbar -->
+    <header
+      class="sticky top-0 z-50 backdrop-blur-sm bg-white/30 h-20 shadow-md"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <!-- Left Side: Logo and Course -->
+        <div class="flex items-center gap-6">
+          <img
+            src="https://imgs.search.brave.com/en2tNErqN1QD2tiIwNhhrraV9P2BpuwppRr9Kqu0-YA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzZhL2Y3/LzFiLzZhZjcxYmU1/ZTQ4OTQ2ZTljYjZl/NWUwZWI3YTJmZDcx/LmpwZw"
+            alt="LOGO"
+            class="w-10 h-10 object-cover rounded-full border border-gray-300 cursor-pointer"
+          />
+          <a
+            href="#"
+            class="relative group text-gray-800 font-semibold text-lg transition-colors duration-300 hover:text-rose-500"
+          >
+            Courses
+            <!-- underline -->
+            <span
+              class="absolute left-0 -bottom-1 h-[2px] w-0 bg-rose-500 transition-all duration-[1000ms] group-hover:w-full"
+            ></span>
+          </a>
+        </div>
+
+        <!-- Right Side: Register and Login -->
+        <div class="flex items-center gap-4">
+          <a
+            href="#"
+            class="text-gray-800 text-lg font-medium hover:text-rose-500 transition"
+            >Login</a
+          >
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-rose-500 transition-all duration-[1000ms] group-hover:w-full"
+          ></span>
+          <a
+            href="#"
+            class="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-4 py-2 rounded-md text-sm font-medium shadow-md transition duration-300 ease-in-out hover:from-rose-700 hover:to-pink-700 hover:shadow-lg hover:scale-105 hover:opacity-100"
+          >
+            Register
+          </a>
+          <button
+            id="themeToggle"
+            class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition"
+          >
+            <span id="themeIcon">🌞</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ✅ Hero Section -->
+    <section
+      class="w-full bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 py-14 px-4 relative overflow-hidden"
+    >
+      <div
+        class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-10"
+      >
+        <!-- ✅ Left: Boy Image + 500+ Courses + Rating -->
+        <div class="relative flex justify-center items-center">
+          <img
+            src="boy.png"
+            alt="Boy"
+            class="w-[250px] sm:w-[280px] md:w-[300px] rounded-lg shadow-xl"
+          />
+
+          <!-- Circle Above -->
+          <div
+            class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-purple-700 text-sm font-bold px-4 py-2 rounded-full shadow-md"
+          >
+            🎓 500+ Courses
+          </div>
+
+          <!-- Rating Badge -->
+          <div
+            class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white text-gray-800 px-4 py-2 rounded-2xl shadow-lg text-sm font-medium flex items-center gap-2"
+          >
+            ⭐ 4.9 Rating
+          </div>
+        </div>
+
+        <!-- ✅ Center: Headings + Search -->
+        <div class="w-full md:w-[50%] text-center px-4">
+          <h1 class="text-white text-4xl sm:text-5xl font-cursive leading-snug">
+            Learn A New Skill
+          </h1>
+          <p class="text-yellow-400 text-xl sm:text-2xl font-cursive mt-2 mb-6">
+            Everyday, Anytime and Anywhere
+          </p>
+
+          <!-- Search Bar with embedded button -->
+          <div class="relative w-full max-w-xl mx-auto">
+            <input
+              type="text"
+              placeholder="What do you want to learn today?"
+              class="w-full py-4 pr-36 pl-10 rounded-full shadow-md focus:outline-none text-base text-gray-800"
+              id="searchInput"
+            />
+
+            <!-- Search icon -->
+            <div
+              class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg"
+            >
+              🔍
+            </div>
+
+            <!-- Search Button -->
+            <button
+              class="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-700 to-rose-500 text-white px-6 py-2 rounded-full font-medium shadow-md hover:opacity-90 transition"
+              onclick="scrollToSection()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+
+        <!-- ✅ Right: Girl Image + Happy Kids -->
+        <div class="relative flex justify-center items-center">
+          <img
+            src="girl.png"
+            alt="Girl"
+            class="w-[250px] sm:w-[280px] md:w-[300px] rounded-lg shadow-xl"
+          />
+
+          <!-- Circle Above -->
+          <div
+            class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-pink-600 text-sm font-bold px-4 py-2 rounded-full shadow-md flex items-center gap-2"
+          >
+            😊 10k+ Happy Kids
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center mb-8 mt-4">
+      <h1 class="text-3xl font-bold mb-2">How old are you?🎯</h1>
+      <p class="text-gray-600 text-lg">
+        Pick your age and find the perfect courses just for you!✨
+      </p>
+    </section>
+
+    <div class="flex flex-wrap justify-center gap-4">
+      <!-- Repeating boxes -->
+      <!-- You can generate these with JavaScript if needed -->
+      <!-- Each box has a gradient border and shows age in two lines -->
+
+      <!-- Example for 1-2 years -->
+      <div class="p-1 rounded-xl bg-gradient-to-r from-red-500 to-yellow-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          1–2<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          2–3<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-green-500 to-teal-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          3–4<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-pink-500 to-fuchsia-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          4–5<br />years
+        </div>
+      </div>
+      <div
+        class="p-1 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500"
+      >
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          5–6<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-green-500 to-teal-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          6–7<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          7–8<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-red-500 to-yellow-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          8–9<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-green-500 to-teal-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          9–10<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          10–11<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-red-500 to-yellow-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          11–12<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          12–13<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-green-500 to-teal-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          13–14<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          14–15<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-pink-500 to-fuchsia-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          15–16<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          16–17<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-pink-500 to-fuchsia-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          17–18<br />years
+        </div>
+      </div>
+      <div class="p-1 rounded-xl bg-gradient-to-r from-green-500 to-teal-500">
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          18–19<br />years
+        </div>
+      </div>
+      <div
+        class="p-1 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500"
+      >
+        <div
+          class="bg-white px-4 py-3 rounded-lg text-center w-18 h-14 text-xs"
+        >
+          19–20<br />years
+        </div>
+      </div>
+    </div>
+    <section
+      class="container text-center mb-8 mt-4 bg-gray-200 p-6 rounded-lg shadow-md"
+    >
+      <h1 class="text-3xl font-bold mb-2">New Launches🌟</h1>
+      <p class="text-gray-600 text-lg mb-6">
+        Our most loved courses that kids absolutely adore!
+      </p>
+
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center"
+      >
+        <!-- Repeat this block for each course card -->
+        <!-- You can copy/paste or loop dynamically in frameworks -->
+        <!-- ✅ Course Card -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Selling Fast Badge -->
+          <div
+            class="absolute top-4 left-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full z-10"
+          >
+            Selling Fast
+          </div>
+
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="text-center mb-8 mt-4 p-6 rounded-lg shadow-md">
+      <h1 class="text-3xl font-bold mb-2">Featured Courses🌟</h1>
+      <p class="text-gray-600 text-lg mb-6">
+        Our most loved courses that kids absolutely adore!
+      </p>
+
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center"
+      >
+        <!-- Repeat this block for each course card -->
+        <!-- You can copy/paste or loop dynamically in frameworks -->
+        <!-- ✅ Course Card -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Selling Fast Badge -->
+          <div
+            class="absolute top-4 left-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full z-10"
+          >
+            Selling Fast
+          </div>
+
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 text-start">By: Daniel james</p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 bg-gray-50 text-center">
+      <!-- Heading -->
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">
+        Learn from Top Teachers
+      </h1>
+      <p class="text-lg text-gray-600 mb-12">
+        Expert instructors who make learning fun and engaging for every child
+      </p>
+
+      <!-- Cards -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center"
+      >
+        <!-- Card 1 -->
+        <div
+          class="relative bg-white p-4 pt-12 rounded-2xl shadow-md w-48 text-center"
+        >
+          <!-- Image (floating outside the top) -->
+          <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+            <img
+              src="andy.png"
+              alt="Andy Brew"
+              class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+            />
+          </div>
+
+          <!-- Name -->
+          <h3 class="text-lg font-semibold text-gray-900">Andy Brew</h3>
+
+          <!-- Qualifications & Experience -->
+          <p class="text-gray-500 text-sm mt-1">M.Sc, B.Ed | 15+ Years</p>
+
+          <!-- Students -->
+          <p class="text-gray-400 text-xs mt-1">1000+ Students</p>
+
+          <!-- Subject -->
+          <span
+            class="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full mt-2"
+          >
+            Computer science
+          </span>
+        </div>
+
+        <!-- Repeat 4 more times -->
+        <div
+          class="relative bg-white p-4 pt-12 rounded-2xl shadow-md w-48 text-center"
+        >
+          <!-- Image (floating outside the top) -->
+          <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+            <img
+              src="andy.png"
+              alt="Andy Brew"
+              class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+            />
+          </div>
+
+          <!-- Name -->
+          <h3 class="text-lg font-semibold text-gray-900">Andy Brew</h3>
+
+          <!-- Qualifications & Experience -->
+          <p class="text-gray-500 text-sm mt-1">M.Sc, B.Ed | 15+ Years</p>
+
+          <!-- Students -->
+          <p class="text-gray-400 text-xs mt-1">1000+ Students</p>
+
+          <!-- Subject -->
+          <span
+            class="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full mt-2"
+          >
+            Computer science
+          </span>
+        </div>
+
+        <div
+          class="relative bg-white p-4 pt-12 rounded-2xl shadow-md w-48 text-center"
+        >
+          <!-- Image (floating outside the top) -->
+          <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+            <img
+              src="andy.png"
+              alt="Andy Brew"
+              class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+            />
+          </div>
+
+          <!-- Name -->
+          <h3 class="text-lg font-semibold text-gray-900">Andy Brew</h3>
+
+          <!-- Qualifications & Experience -->
+          <p class="text-gray-500 text-sm mt-1">M.Sc, B.Ed | 15+ Years</p>
+
+          <!-- Students -->
+          <p class="text-gray-400 text-xs mt-1">1000+ Students</p>
+
+          <!-- Subject -->
+          <span
+            class="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full mt-2"
+          >
+            Computer science
+          </span>
+        </div>
+
+        <div
+          class="relative bg-white p-4 pt-12 rounded-2xl shadow-md w-48 text-center"
+        >
+          <!-- Image (floating outside the top) -->
+          <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+            <img
+              src="andy.png"
+              alt="Andy Brew"
+              class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+            />
+          </div>
+
+          <!-- Name -->
+          <h3 class="text-lg font-semibold text-gray-900">Andy Brew</h3>
+
+          <!-- Qualifications & Experience -->
+          <p class="text-gray-500 text-sm mt-1">M.Sc, B.Ed | 15+ Years</p>
+
+          <!-- Students -->
+          <p class="text-gray-400 text-xs mt-1">1000+ Students</p>
+
+          <!-- Subject -->
+          <span
+            class="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full mt-2"
+          >
+            Computer science
+          </span>
+        </div>
+
+        <div
+          class="relative bg-white p-4 pt-12 rounded-2xl shadow-md w-48 text-center"
+        >
+          <!-- Image (floating outside the top) -->
+          <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+            <img
+              src="andy.png"
+              alt="Andy Brew"
+              class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+            />
+          </div>
+
+          <!-- Name -->
+          <h3 class="text-lg font-semibold text-gray-900">Andy Brew</h3>
+
+          <!-- Qualifications & Experience -->
+          <p class="text-gray-500 text-sm mt-1">M.Sc, B.Ed | 15+ Years</p>
+
+          <!-- Students -->
+          <p class="text-gray-400 text-xs mt-1">1000+ Students</p>
+
+          <!-- Subject -->
+          <span
+            class="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full mt-2"
+          >
+            Computer science
+          </span>
+        </div>
+      </div>
+    </section>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center bg-gray-50 p-6 rounded-lg shadow-md"
+    >
+      <div
+        class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+      >
+        <!-- Selling Fast Badge -->
+        <div
+          class="absolute top-4 left-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full z-10"
+        >
+          Selling Fast
+        </div>
+
+        <!-- Rating -->
+        <div
+          class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+        >
+          ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+        </div>
+
+        <!-- Image -->
+        <img
+          src="research.png"
+          alt="Course"
+          class="w-full h-44 object-cover rounded-xl mt-6"
+        />
+
+        <!-- Labels -->
+        <div class="flex gap-2 mt-4 flex-wrap">
+          <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+            >English</span
+          >
+          <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+            >Intermediate</span
+          >
+          <span
+            class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+            >4 classes</span
+          >
+        </div>
+
+        <!-- Course Title -->
+        <h3
+          class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+        >
+          Summer robotics camp: fun projects with auto arduino, Tink...
+        </h3>
+
+        <!-- Course Description -->
+        <p class="text-gray-500 text-xs mt-2 text-start">By: Daniel james</p>
+
+        <!-- Footer Info -->
+        <div
+          class="flex justify-between items-center mt-4 text-sm text-gray-600"
+        >
+          <div class="flex items-center gap-1">
+            <span>👦</span>
+            <span>7–10 yrs</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>⏱️</span>
+            <span>45</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>₹</span>
+            <span>299</span>
+          </div>
+          <button class="text-gray-500 hover:text-rose-500 transition text-lg">
+            🛒
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div
+        class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+      >
+        <!-- Rating -->
+        <div
+          class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+        >
+          ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+        </div>
+
+        <!-- Image -->
+        <img
+          src="research.png"
+          alt="Course"
+          class="w-full h-44 object-cover rounded-xl mt-6"
+        />
+
+        <!-- Labels -->
+        <div class="flex gap-2 mt-4 flex-wrap">
+          <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+            >English</span
+          >
+          <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+            >Intermediate</span
+          >
+          <span
+            class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+            >4 classes</span
+          >
+        </div>
+
+        <!-- Course Title -->
+        <h3
+          class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+        >
+          Summer robotics camp: fun projects with auto arduino, Tink...
+        </h3>
+
+        <!-- Course Description -->
+        <p class="text-gray-500 text-xs mt-2 leading-snug">By: Daniel james</p>
+
+        <!-- Footer Info -->
+        <div
+          class="flex justify-between items-center mt-4 text-sm text-gray-600"
+        >
+          <div class="flex items-center gap-1">
+            <span>👦</span>
+            <span>7–10 yrs</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>⏱️</span>
+            <span>45</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>₹</span>
+            <span>299</span>
+          </div>
+          <button class="text-gray-500 hover:text-rose-500 transition text-lg">
+            🛒
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div
+        class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+      >
+        <!-- Rating -->
+        <div
+          class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+        >
+          ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+        </div>
+
+        <!-- Image -->
+        <img
+          src="research.png"
+          alt="Course"
+          class="w-full h-44 object-cover rounded-xl mt-6"
+        />
+
+        <!-- Labels -->
+        <div class="flex gap-2 mt-4 flex-wrap">
+          <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+            >English</span
+          >
+          <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+            >Intermediate</span
+          >
+          <span
+            class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+            >4 classes</span
+          >
+        </div>
+
+        <!-- Course Title -->
+        <h3
+          class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+        >
+          Summer robotics camp: fun projects with auto arduino, Tink...
+        </h3>
+
+        <!-- Course Description -->
+        <p class="text-gray-500 text-xs mt-2 leading-snug">By: Daniel james</p>
+
+        <!-- Footer Info -->
+        <div
+          class="flex justify-between items-center mt-4 text-sm text-gray-600"
+        >
+          <div class="flex items-center gap-1">
+            <span>👦</span>
+            <span>7–10 yrs</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>⏱️</span>
+            <span>45</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>₹</span>
+            <span>299</span>
+          </div>
+          <button class="text-gray-500 hover:text-rose-500 transition text-lg">
+            🛒
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div
+        class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+      >
+        <!-- Rating -->
+        <div
+          class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+        >
+          ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+        </div>
+
+        <!-- Image -->
+        <img
+          src="research.png"
+          alt="Course"
+          class="w-full h-44 object-cover rounded-xl mt-6"
+        />
+
+        <!-- Labels -->
+        <div class="flex gap-2 mt-4 flex-wrap">
+          <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+            >English</span
+          >
+          <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+            >Intermediate</span
+          >
+          <span
+            class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+            >4 classes</span
+          >
+        </div>
+
+        <!-- Course Title -->
+        <h3
+          class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+        >
+          Summer robotics camp: fun projects with auto arduino, Tink...
+        </h3>
+
+        <!-- Course Description -->
+        <p class="text-gray-500 text-xs mt-2 leading-snug">By: Daniel james</p>
+
+        <!-- Footer Info -->
+        <div
+          class="flex justify-between items-center mt-4 text-sm text-gray-600"
+        >
+          <div class="flex items-center gap-1">
+            <span>👦</span>
+            <span>7–10 yrs</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>⏱️</span>
+            <span>45</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span>₹</span>
+            <span>299</span>
+          </div>
+          <button class="text-gray-500 hover:text-rose-500 transition text-lg">
+            🛒
+          </button>
+        </div>
+      </div>
+    </div>
+    <section
+      class="bg-[#f9f9ff] py-4 px-6 flex items-center justify-center relative"
+    >
+      <!-- Left Dotted Line with Diamond -->
+      <div class="flex items-center">
+        <div class="w-16 h-1 border-t-2 border-dotted border-purple-500"></div>
+        <div class="w-3 h-3 bg-purple-500 rotate-45 mx-2"></div>
+      </div>
+
+      <!-- Text -->
+      <h1 class="text-3xl font-semibold text-gray-800 mx-4">
+        Webinar starting within 24 hrs
+      </h1>
+
+      <!-- Right Dotted Line with Diamond -->
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-purple-500 rotate-45 mx-2"></div>
+        <div class="w-16 h-1 border-t-2 border-dotted border-purple-500"></div>
+      </div>
+
+      <!-- Clock PNG Icon -->
+      <div class="absolute right-6 opacity-20">
+        <img
+          src="clock.png"
+          alt="Clock Icon"
+          class="w-16 h-16 object-contain"
+        />
+      </div>
+    </section>
+    <section>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center"
+      >
+        <!-- Repeat this block for each course card -->
+        <!-- You can copy/paste or loop dynamically in frameworks -->
+        <!-- ✅ Course Card -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Selling Fast Badge -->
+          <div
+            class="absolute top-4 left-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full z-10"
+          >
+            Selling Fast
+          </div>
+
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Starting at 4am</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 text-start">By: Daniel james</p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Starting at 7pm</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Starting at 10am</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Starting at 3pm</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Popular Categories Section -->
+    <section class="py-10 px-6 bg-white text-center">
+      <!-- Heading -->
+      <h1 class="text-3xl font-semibold text-gray-900">Popular Categories</h1>
+      <p class="text-gray-600 mt-2">
+        Pick what you love most! These categories have everything you need to
+        learn something awesome ✨
+      </p>
+
+      <!-- Categories Cards -->
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <!-- Card 1: Coding (Active) -->
+        <div class="max-w-sm mx-auto">
+          <img
+            src="laptop.png"
+            alt="Card"
+            class="w-full h-auto rounded-xl cursor-pointer shadow-lg"
+          />
+        </div>
+        <!-- Card 2: Public Speaking -->
+        <div class="max-w-sm mx-auto">
+          <img
+            src="mic.png"
+            alt="Card"
+            class="w-full h-auto rounded-xl cursor-pointer shadow-lg"
+          />
+        </div>
+
+        <!-- Card 3: Chess -->
+        <div class="max-w-sm mx-auto">
+          <img
+            src="chess.png"
+            alt="Card"
+            class="w-full h-auto rounded-xl cursor-pointer shadow-lg"
+          />
+        </div>
+
+        <!-- Card 4: Homework Help -->
+        <div class="max-w-sm mx-auto">
+          <img
+            src="book.png"
+            alt="Card"
+            class="w-full h-auto rounded-xl cursor-pointer shadow-lg"
+          />
+        </div>
+
+        <!-- Card 5: App Building -->
+        <div class="max-w-sm mx-auto">
+          <img
+            src="mobile.png"
+            alt="Card"
+            class="w-full h-auto rounded-xl cursor-pointer shadow-lg"
+          />
+        </div>
+      </div>
+    </section>
+    <section>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center"
+      >
+        <!-- Repeat this block for each course card -->
+        <!-- You can copy/paste or loop dynamically in frameworks -->
+        <!-- ✅ Course Card -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Selling Fast Badge -->
+          <div
+            class="absolute top-4 left-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full z-10"
+          >
+            Selling Fast
+          </div>
+
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 text-start">By: Daniel james</p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div
+          class="max-w-xs w-full rounded-2xl shadow-lg bg-transperent p-4 relative overflow-hidden mx-auto"
+        >
+          <!-- Rating -->
+          <div
+            class="absolute top-4 right-4 text-sm text-gray-500 flex items-center gap-1"
+          >
+            ⭐ 4.9 | <span class="text-gray-400">200+ learners</span>
+          </div>
+
+          <!-- Image -->
+          <img
+            src="research.png"
+            alt="Course"
+            class="w-full h-44 object-cover rounded-xl mt-6"
+          />
+
+          <!-- Labels -->
+          <div class="flex gap-2 mt-4 flex-wrap">
+            <span
+              class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full"
+              >English</span
+            >
+            <span class="bg-red-100 text-red-500 text-xs px-3 py-1 rounded-full"
+              >Intermediate</span
+            >
+            <span
+              class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full"
+              >4 classes</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm font-semibold mt-3 text-gray-900 leading-snug line-clamp-2"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tink...
+          </h3>
+
+          <!-- Course Description -->
+          <p class="text-gray-500 text-xs mt-2 leading-snug">
+            By: Daniel james
+          </p>
+
+          <!-- Footer Info -->
+          <div
+            class="flex justify-between items-center mt-4 text-sm text-gray-600"
+          >
+            <div class="flex items-center gap-1">
+              <span>👦</span>
+              <span>7–10 yrs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>⏱️</span>
+              <span>45</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span>₹</span>
+              <span>299</span>
+            </div>
+            <button
+              class="text-gray-500 hover:text-rose-500 transition text-lg"
+            >
+              🛒
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-[#f7fdfd] py-10 px-6 text-center">
+      <!-- Section Title -->
+      <h1 class="text-3xl font-semibold text-gray-900 mb-2">
+        Filter with Time
+      </h1>
+      <p class="text-gray-600 mb-8">
+        Choose the perfect time that fits your child's schedule
+      </p>
+
+      <!-- Time Filter Cards -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <!-- Morning -->
+        <div
+          class="flex items-center justify-between w-60 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition duration-200"
+        >
+          <div class="text-left">
+            <h2 class="font-medium text-gray-800">Morning classes</h2>
+            <p class="text-sm text-gray-500">8am - 12pm</p>
+          </div>
+          <img
+            src="morning.png"
+            alt="Morning Icon"
+            class="w-8 h-8 object-contain"
+          />
+        </div>
+
+        <!-- Afternoon -->
+        <div
+          class="flex items-center justify-between w-60 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition duration-200"
+        >
+          <div class="text-left">
+            <h2 class="font-medium text-gray-800">Afternoon classes</h2>
+            <p class="text-sm text-gray-500">12pm - 4pm</p>
+          </div>
+          <img
+            src="afternoon.png"
+            alt="Afternoon Icon"
+            class="w-8 h-8 object-contain"
+          />
+        </div>
+
+        <!-- Evening -->
+        <div
+          class="flex items-center justify-between w-60 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition duration-200"
+        >
+          <div class="text-left">
+            <h2 class="font-medium text-gray-800">Evening classes</h2>
+            <p class="text-sm text-gray-500">4pm - 8pm</p>
+          </div>
+          <img
+            src="evening.png"
+            alt="Evening Icon"
+            class="w-8 h-8 object-contain"
+          />
+        </div>
+
+        <!-- Late Evening -->
+        <div
+          class="flex items-center justify-between w-60 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition duration-200"
+        >
+          <div class="text-left">
+            <h2 class="font-medium text-gray-800">Late evening classes</h2>
+            <p class="text-sm text-gray-500">8pm - 11pm</p>
+          </div>
+          <img
+            src="lateNight.png"
+            alt="Late Evening Icon"
+            class="w-8 h-8 object-contain"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-row items-center justify-center py-10 bg-gray-50">
+      <div
+        class="max-w-3xl w-full bg-white rounded-2xl shadow-md overflow-hidden relative p-4 flex gap-4 items-start"
+      >
+        <!-- Selling Fast Tag -->
+        <div
+          class="absolute -top-3 left-4 bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-md shadow"
+        >
+          Selling Fast
+        </div>
+
+        <!-- Course Image -->
+        <img
+          src="research.png"
+          alt="Course Thumbnail"
+          class="w-32 h-24 sm:w-40 sm:h-28 object-cover rounded-lg"
+        />
+
+        <!-- Course Info -->
+        <div class="flex-1">
+          <!-- Badges -->
+          <div class="flex flex-wrap gap-2 mb-1">
+            <span
+              class="text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 font-medium"
+              >English</span
+            >
+            <span
+              class="text-xs px-2 py-1 rounded-full bg-pink-100 text-pink-800 font-medium"
+              >Intermediate</span
+            >
+            <span
+              class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-800 font-medium"
+              >Morning class</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm sm:text-base font-semibold text-gray-800 leading-snug mb-1"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tinker cad
+            coding and 3d printing
+          </h3>
+
+          <!-- Instructor Info -->
+          <p class="text-xs text-gray-600 flex items-center gap-1 mb-2">
+            By: <span class="font-medium text-gray-800">Daniel james</span>
+            <span class="text-yellow-500">⭐</span> 4.9 |
+            <span class="text-gray-500">200+ learners</span>
+          </p>
+
+          <!-- Meta Info -->
+          <div class="flex flex-wrap items-center gap-4 text-xs text-gray-700">
+            <div class="flex items-center gap-1">
+              <span class="inline-block text-gray-600">👦</span> 7–10 yrs
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="inline-block text-gray-600">⏱️</span> 45 min
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="inline-block text-gray-600">₹</span> 299
+            </div>
+            <div class="ml-auto">
+              <button
+                class="bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition"
+              >
+                🛒
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-3xl w-full bg-white rounded-2xl shadow-md overflow-hidden relative p-4 flex gap-4 items-start"
+      >
+        <!-- Course Image -->
+        <img
+          src="research.png"
+          alt="Course Thumbnail"
+          class="w-32 h-24 sm:w-40 sm:h-28 object-cover rounded-lg"
+        />
+
+        <!-- Course Info -->
+        <div class="flex-1">
+          <!-- Badges -->
+          <div class="flex flex-wrap gap-2 mb-1">
+            <span
+              class="text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 font-medium"
+              >English</span
+            >
+            <span
+              class="text-xs px-2 py-1 rounded-full bg-pink-100 text-pink-800 font-medium"
+              >Intermediate</span
+            >
+            <span
+              class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-800 font-medium"
+              >Morning class</span
+            >
+          </div>
+
+          <!-- Course Title -->
+          <h3
+            class="text-sm sm:text-base font-semibold text-gray-800 leading-snug mb-1"
+          >
+            Summer robotics camp: fun projects with auto arduino, Tinker cad
+            coding and 3d printing
+          </h3>
+
+          <!-- Instructor Info -->
+          <p class="text-xs text-gray-600 flex items-center gap-1 mb-2">
+            By: <span class="font-medium text-gray-800">Daniel james</span>
+            <span class="text-yellow-500">⭐</span> 4.9 |
+            <span class="text-gray-500">200+ learners</span>
+          </p>
+
+          <!-- Meta Info -->
+          <div class="flex flex-wrap items-center gap-4 text-xs text-gray-700">
+            <div class="flex items-center gap-1">
+              <span class="inline-block text-gray-600">👦</span> 7–10 yrs
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="inline-block text-gray-600">⏱️</span> 45 min
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="inline-block text-gray-600">₹</span> 299
+            </div>
+            <div class="ml-auto">
+              <button
+                class="bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition"
+              >
+                🛒
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
